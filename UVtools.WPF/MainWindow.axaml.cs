@@ -26,7 +26,6 @@ using UVtools.Core;
 using UVtools.Core.Extensions;
 using UVtools.Core.FileFormats;
 using UVtools.Core.Managers;
-using UVtools.Core.Network;
 using UVtools.Core.Operations;
 using UVtools.WPF.Controls;
 using UVtools.WPF.Controls.Calibrators;
@@ -632,22 +631,6 @@ namespace UVtools.WPF
                     menuItems.Add(menuItem);
                 }
 
-                if (Settings.General.SendToCustomLocations is not null)
-                {
-                    foreach (var location in Settings.General.SendToCustomLocations)
-                    {
-                        var menuItem = new MenuItem
-                        {
-                            Header = location.ToString(),
-                            Tag = location,
-                        };
-                        menuItem.Click += FileSendToItemClick;
-
-                        menuItems.Add(menuItem);
-                    }
-                }
-
-
                 MenuFileSendToItems = menuItems.ToArray();
                 _menuFileSendTo.IsVisible = _menuFileSendTo.IsEnabled = menuItems.Count > 0;
             };
@@ -670,10 +653,6 @@ namespace UVtools.WPF
                 }
 
                 path = drive.Name;
-            }
-            else if (menuItem.Tag is MappedDevice device)
-            {
-                path = device.Path;
             }
             else
             {

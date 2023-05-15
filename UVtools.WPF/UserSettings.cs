@@ -16,7 +16,6 @@ using System.Xml.Serialization;
 using Avalonia.Media;
 using JetBrains.Annotations;
 using UVtools.Core;
-using UVtools.Core.Network;
 using UVtools.Core.Objects;
 using Color=UVtools.WPF.Structures.Color;
 
@@ -54,7 +53,6 @@ namespace UVtools.WPF
             private bool _promptOverwriteFileSave = true;
             private string _fileSaveNamePrefix;
             private string _fileSaveNameSuffix = "_copy";
-            private RangeObservableCollection<MappedDevice> _sendToCustomLocations = new();
 
 
             public bool StartMaximized
@@ -169,20 +167,12 @@ namespace UVtools.WPF
                 set => RaiseAndSetIfChanged(ref _fileSaveNameSuffix, value);
             }
 
-            public RangeObservableCollection<MappedDevice> SendToCustomLocations
-            {
-                get => _sendToCustomLocations;
-                set => RaiseAndSetIfChanged(ref _sendToCustomLocations, value);
-            }
-
             public GeneralUserSettings() { }
 
             public GeneralUserSettings Clone()
             {
                 
                 var clone = MemberwiseClone() as GeneralUserSettings;
-                _sendToCustomLocations ??= new();
-                clone.SendToCustomLocations = new RangeObservableCollection<MappedDevice>(_sendToCustomLocations.ToArray());
                 return clone;
             }
         }
