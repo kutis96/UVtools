@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "UVtools.StitcherTest": {
+      "commandName": "Project",
+      "commandLineArgs": "--help"
+    }
+  }
+}
